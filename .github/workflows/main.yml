@@ -1,5 +1,4 @@
 # This is a basic workflow to help you get started with Actions
-
 name: CI-CD
 
 on:
@@ -29,7 +28,6 @@ jobs:
           tags: |
             thaynafonseca/kube-news:latest
             thaynafonseca/kube-news:${{github.run_number}}
-
   CD:
     runs-on: ubuntu-latest
     needs: [CI]
@@ -40,25 +38,7 @@ jobs:
         uses: Azure/k8s-set-context@v3.0
         with:
           method: kubeconfig
-          kubeconfig: |
-            apiVersion: v1
-            kind: Config
-            clusters:
-            - cluster:
-                certificate-authority-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURKekNDQWcrZ0F3SUJBZ0lDQm5Vd0RRWUpLb1pJaHZjTkFRRUxCUUF3TXpFVk1CTUdBMVVFQ2hNTVJHbG4KYVhSaGJFOWpaV0Z1TVJvd0dBWURWUVFERXhGck9ITmhZWE1nUTJ4MWMzUmxjaUJEUVRBZUZ3MHlNakE0TURReQpNakE0TlRWYUZ3MDBNakE0TURReU1qQTROVFZhTURNeEZUQVRCZ05WQkFvVERFUnBaMmwwWVd4UFkyVmhiakVhCk1CZ0dBMVVFQXhNUmF6aHpZV0Z6SUVOc2RYTjBaWElnUTBFd2dnRWlNQTBHQ1NxR1NJYjNEUUVCQVFVQUE0SUIKRHdBd2dnRUtBb0lCQVFERTRFQldVbnZGa01nL2s2YTNhWkQ5TS9odGNQL3JMRTZ0T3MvY2pQbW1jOEZSVlY3OApmaDNjWEJvUXFWR3k2Vi93a2VLNTZPdGZodXNEQ01DNmVPMXd6VEYzRVQ2b2didjhaeXQrOGtpd1h0UHQ4UkNVClUzQ3hyODJDVEJOckx6RnY1NDc5Q2dKeW1GV1JnanZwWXhiQmlNalhhbmVJelpwWElneHA2TGVzWVZWaGZvdXUKQWZuVzBPQWdjMTU5eEhZVVh1TXdneUxoVnMyUFNoeWJNK1dSWGRSV3JpQS9ZdFl2dFdCVXFsY2pxNmd1WHl4OQpvOURaekVBQS9vSTF0VVROYllQUVBGWFZzUHd5NEdRejJGT0IwVmExS3ZwVkpnSFJxUUY0UEo0eExCY2U5a2RyCmtUWkVYWW9DZlBOeWt1dE5OYndTelEwYW1rczl4RjJ3ampvMUFnTUJBQUdqUlRCRE1BNEdBMVVkRHdFQi93UUUKQXdJQmhqQVNCZ05WSFJNQkFmOEVDREFHQVFIL0FnRUFNQjBHQTFVZERnUVdCQlRZT3piTkdMbVNnYjcxMlJzQgo5REhZTlFqTjlEQU5CZ2txaGtpRzl3MEJBUXNGQUFPQ0FRRUFFVUptRGNDeUd2WWRrbStCQ1JQY3RzWjY2RDNYCkRWaEwyY3RWd3R6ai82UW1OMnBSRFIvS3lBTll3b0hxYXRKRy80eDU3aFRLeGsrT2Y5L00zVVBxaHUrS0NhUUIKUHFIWVg3K1RhMTVVN21LaU9WYlR5UWlrZGg1SUI5ZUFwS3h5TGhpMVkweEdOMTh6bDZMd0h2TGtqSVljZ2swVApmN0MzejY5VHplM01zN3NuUTYway9leXBRbFV3MHo3bEJhbzFoK2VGWVlZdmorZStVblo4MXY2Y1pMakNucjJkCitUUmZQbU5NWUpPMnFQY3djemFRVnZuU1BESnZZam53Rm50UFFhNys4WUhzNXMwYit1QkNMVnM5Q3BiTkRIeXYKT0ljQUVjemFIWDBIZ3gyV29Hb1I5NUVYTXkrRm1ValJUMU5GaUY0aE9YSU1JRlJ6RWFUTFAweDFuQT09Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K
-                server: https://89c7a055-476a-4a53-bc4a-30c311c19253.k8s.ondigitalocean.com
-            name: do-nyc1-k8s-devops
-            contexts:
-            - context:
-                cluster: do-nyc1-k8s-devops
-                user: do-nyc1-k8s-devops-admin
-            name: do-nyc1-k8s-devops
-            current-context: do-nyc1-k8s-devops
-            users:
-            - name: do-nyc1-k8s-devops-admin
-              user:
-                token: dop_v1_4b5dd3455ddc2098e2f3d3b818bc93cc486d5ddeb6aaafe92df0ad7c76e7c9c8
-            
+          kubeconfig: ${{secrets.K8S_CONFIG}} 
         
       
       - name: Deploy to Kubernetes cluster
