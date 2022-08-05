@@ -41,7 +41,7 @@ jobs:
           kubeconfig: ${{secrets.K8S_CONFIG}} 
         
       
-      - name: Efetuando o deployment no Kubernetes
+      - name: Efetuando o deployment
         uses: Azure/k8s-deploy@v4.3
         with:
           images: thaynafonseca/kube-news:${{github.run_number}}
