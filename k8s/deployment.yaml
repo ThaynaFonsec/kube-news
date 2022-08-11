@@ -50,11 +50,7 @@ spec:
   template:
     metadata:
       labels:
-        app: kubenews
-      annotations:
-        prometheus.io/scrape: "true"
-        prometheus.io/port: "8080"
-        prometheus.io/path: "/metrics"       
+        app: kubenews       
     spec:
       containers:
       - name: kubenews
