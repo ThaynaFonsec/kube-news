@@ -70,6 +70,7 @@ spec:
           value: "postgre"
 ---
 
+
 apiVersion: v1
 kind: Service 
 metadata:
